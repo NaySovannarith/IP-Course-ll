@@ -33,19 +33,6 @@ class CategoryApiTest extends TestCase
         $response->assertStatus(200)
                  ->assertJsonFragment(['name' => $category->name]);
     }
-    /**
-    * Test Case ID: TC006
-    * Description: Test that an admin can create a category
-    * Precondition: A user exists with admin privileges.
-    * Test Steps:
-    *   1. Send POST request to /api/categories with category name
-    * Test Data: Name: "Electronics"
-    * Expected Result: HTTP 201 Created / Category stored in database
-    * Actual Result: HTTP 201 Created / Category stored in database
-    * Status: Passed
-    * Remark: None
-    */
-
     public function test_create_category()
     {
         $response = $this->postJson('/api/categories', [
@@ -55,18 +42,6 @@ class CategoryApiTest extends TestCase
         $response->assertStatus(201);
         $this->assertDatabaseHas('categories', ['name' => 'Electronics']);
     }
-    /**
-    * Test Case ID: TC007
-    * Description: Test delete a category
-    * Precondition: A category exists in the database and the user can delete
-    * Test Steps:
-    *   1. Send DELETE request to /api/categories/{id}
-    * Test Data: Category ID (auto-generated)
-    * Expected Result: HTTP 200 OK / Category deleted from database
-    * Actual Result: HTTP 200 OK / Category deleted from database
-    * Status: Passed
-    * Remark: Category deletion is functioning correctly
-    */
     public function test_delete_category()
     {
         $category = Category::factory()->create();
@@ -89,4 +64,3 @@ class CategoryApiTest extends TestCase
     }
 
 }
-    
